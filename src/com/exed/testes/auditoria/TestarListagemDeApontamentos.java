@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.exed.testes.grc.paginas.ExplorerPage;
 import com.exed.testes.grc.paginas.LoginPage;
@@ -17,18 +18,23 @@ public class TestarListagemDeApontamentos {
 	@Before
 	public void inicializa(){
 		System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("no-sandbox");
+		driver = new ChromeDriver();	
 		loginPage = new LoginPage(driver);
 	}
 
-	@Test(timeout = 1000 * 60)
-	public void acessarListagem() {
+	@Test //(timeout = 1000 * 60)
+	public void acessarListagem() throws InterruptedException {
+		
+		long sleep = 1000;
 		
 		loginPage.visita();
 		
 		ExplorerPage explorerPage = loginPage.executaLogin("f000580", "manager").navegarParaExplorerPage();
-		explorerPage.acessaMenuApontamento();
-		
+		explorerPage.acessaMenuApontamento().acessaRelatorioGerencial();
+		Thread.sleep(sleep);
+		explorerPage.verificaRegistrosDuplicados();
 
 		// FirefoxDriver driver = new FirefoxDriver();
 		//System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
@@ -42,7 +48,7 @@ public class TestarListagemDeApontamentos {
 	
 	@After
 	public void encerraTeste(){
-		//driver.close();
+		driver.close();
 	}
 
 /*	private void logon(String userName, String pass, WebDriver driver) {

@@ -15,8 +15,15 @@ public class ExplorerPage {
 		this.driver = driver;
 	}
 	
-	public void acessaMenuApontamento(){
-		driver.findElement(By.id("item.explorer.issue.management")).click();
+	public ExplorerPage acessaMenuApontamento(){
+		//WebElement framesetElem = driver.findElement(By.xpath("/html/frameset/frameset"));
+		WebDriver frameset = driver.switchTo().defaultContent();
+		WebDriver childFrameset = frameset.switchTo().defaultContent();
+		WebElement frameElem = childFrameset.findElement(By.name("main"));
+		WebDriver frame = driver.switchTo().frame(frameElem);
+		frame.findElement(By.id("item.explorer.issue.management")).click();
+		//driver.findElement(By.id("item.explorer.issue.management")).click();
+		return new ExplorerPage(driver);
 	}
 	
 	public void acessaRelatorioGerencial(){
@@ -24,21 +31,29 @@ public class ExplorerPage {
 	}
 	
 	public boolean verificaRegistrosDuplicados(){
-		WebElement table = driver.findElement(By.id("content"));
-		List<Integer> listaID = this.getListaID(table);
+		WebDriver frameset = driver.switchTo().defaultContent();
+		WebDriver childFrameset = frameset.switchTo().defaultContent();
+		WebElement frameElem = childFrameset.findElement(By.name("main"));
+		WebDriver frame = childFrameset.switchTo().frame(frameElem);
+		String xpath = "/html/body/div/table/tbody/tr/td/form/div/table/tbody[3]/tr/td[2]/a/table/tbody/tr/td[2]";
+		List<WebElement> rows = frame.findElements(By.xpath(xpath));
 		
-		
+		for (WebElement row : rows) {
+			System.out.println(row.getText());
+		}
+		//List<Integer> listaID = this.getListaID(table);
 		
 		return false;
 	}
 	
-	private List<Integer> getListaID(WebElement table){
+	private List<Integer> getListaID(List<WebElement> rows){
 		
 		List<Integer> idList = new ArrayList<>();
 		
-		List<WebElement> cols = table.findElements(By.id("list_row_1"));
-		
-		
+		for (WebElement row : rows) {
+			idList.add(Integer.valueOf(row.getText()));			
+		}
+				
 		return idList;
 		
 	}
