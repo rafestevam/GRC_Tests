@@ -1,5 +1,7 @@
 package com.exed.testes.auditoria;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.exed.testes.grc.paginas.ExplorerPage;
 import com.exed.testes.grc.paginas.LoginPage;
-
 public class TestarListagemDeApontamentos {
 	
 	private WebDriver driver;
@@ -27,14 +28,14 @@ public class TestarListagemDeApontamentos {
 	@Test //(timeout = 1000 * 60)
 	public void acessarListagem() throws InterruptedException {
 		
-		long sleep = 1000;
+		//long sleep = 1000;
 		
 		loginPage.visita();
 		
 		ExplorerPage explorerPage = loginPage.executaLogin("f000580", "manager").navegarParaExplorerPage();
 		explorerPage.acessaMenuApontamento().acessaRelatorioGerencial();
-		Thread.sleep(sleep);
-		explorerPage.verificaRegistrosDuplicados();
+		//Thread.sleep(sleep);
+		assertTrue(explorerPage.verificaRegistrosDuplicados());
 
 		// FirefoxDriver driver = new FirefoxDriver();
 		//System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
