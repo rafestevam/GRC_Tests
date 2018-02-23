@@ -29,7 +29,7 @@ public class ListaApontamentosGerPage {
 		WebDriver frame = childFrameset.switchTo().frame(frameElem);
 
 		String xPathSelect = "/html/body/div/table/tbody/tr/td/form/div/table/tbody[1]/tr/td[1]/table/tbody/tr/td[2]/select";
-		String xPathNext = "/html/body/div/table/tbody/tr/td/form/div/table/tbody[1]/tr/td[1]/table/tbody/tr/td[2]/span/a";
+		String xPathNext = "/html/body/div/table/tbody/tr/td/form/div/table/tbody[1]/tr/td[1]/table/tbody/tr/td[2]/span/a[@id='header_button.page.next.BTN']";
 		//String xpath = "/html/body/div/table/tbody/tr/td/form/div/table/tbody[3]/tr/td[2]/a/table/tbody/tr/td[2]";
 		String xpath = "/html/body/div/table/tbody/tr/td/form/div/table/tbody[3]/tr/td[2]/a/table";
 		// frame.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -67,12 +67,12 @@ public class ListaApontamentosGerPage {
 			}
 			
 			//this.waitForElementPresent(By.xpath(xPathNext), 10);
-			try {
+			/*try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			WebElement buttonNextPage = frame.findElement(By.xpath(xPathNext)).findElement(By.id("header_button.page.next.BTN"));
 			buttonNextPage.click();
 

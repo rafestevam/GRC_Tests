@@ -50,7 +50,7 @@ public class TestarListagemDeApontamentos {
 	
 	@After
 	public void encerraTeste(){
-		driver.close();
+		//driver.close();
 	}
 
 /*	private void logon(String userName, String pass, WebDriver driver) {
