@@ -26,10 +26,38 @@ public class ExplorerPage {
 		// driver.findElement(By.id("item.explorer.issue.management")).click();
 		return new ExplorerPage(driver);
 	}
+	
+	public ExplorerPage acessaMenuControle(){
+		WebDriver frameset = driver.switchTo().defaultContent();
+		WebDriver childFrameset = frameset.switchTo().defaultContent();
+		WebElement frameElem = childFrameset.findElement(By.name("main"));
+		WebDriver frame = driver.switchTo().frame(frameElem);
+		frame.findElement(By.id("item.explorer.issue.management")).click();
+		return new ExplorerPage(driver);
+	}
+	
+	public ExplorerPage acessaMenuRisco(){
+		WebDriver frameset = driver.switchTo().defaultContent();
+		WebDriver childFrameset = frameset.switchTo().defaultContent();
+		WebElement frameElem = childFrameset.findElement(By.name("main"));
+		WebDriver frame = driver.switchTo().frame(frameElem);
+		frame.findElement(By.id("item.explorer.risk.management")).click();
+		return new ExplorerPage(driver);
+	}
 
 	public ListaApontamentosGerPage acessaRelatorioGerencial() {
 		driver.findElement(By.id("dataGrid.Issues3")).click();
 		return new ListaApontamentosGerPage(driver);
+	}
+	
+	public ListaControlesPage acessaListagemControles(){
+		driver.findElement(By.id("dataGrid.control")).click();
+		return new ListaControlesPage(driver);
+	}
+	
+	public ListaRiscosPage acessaListagemRiscos(){
+		driver.findElement(By.id("dataGrid.risk")).click();
+		return new ListaRiscosPage(driver);
 	}
 
 	/*
