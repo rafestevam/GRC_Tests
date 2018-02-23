@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.exed.testes.grc.paginas.ExplorerPage;
+import com.exed.testes.grc.paginas.ListaApontamentosGerPage;
 import com.exed.testes.grc.paginas.LoginPage;
 public class TestarListagemDeApontamentos {
 	
@@ -33,9 +34,9 @@ public class TestarListagemDeApontamentos {
 		loginPage.visita();
 		
 		ExplorerPage explorerPage = loginPage.executaLogin("f000580", "manager").navegarParaExplorerPage();
-		explorerPage.acessaMenuApontamento().acessaRelatorioGerencial();
+		ListaApontamentosGerPage listaAponamentos = explorerPage.acessaMenuApontamento().acessaRelatorioGerencial();
 		//Thread.sleep(sleep);
-		assertTrue(explorerPage.verificaRegistrosDuplicados());
+		assertTrue(listaAponamentos.verificaRegistrosDuplicados());
 
 		// FirefoxDriver driver = new FirefoxDriver();
 		//System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
